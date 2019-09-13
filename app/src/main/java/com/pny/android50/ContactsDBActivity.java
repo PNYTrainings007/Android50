@@ -31,13 +31,10 @@ public class ContactsDBActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts_db);
-
 
         sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
         database = MobileDatabase.getInstance(this);

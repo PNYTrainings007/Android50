@@ -1,6 +1,8 @@
 package com.pny.android50;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -29,6 +31,7 @@ public class VolleyActivity extends AppCompatActivity {
 
     String sendUrl = "http://epay.cybussolutions.com/Api_Service/signupUser";
 
+    RecyclerView tennisPlayerRV;
 
     ArrayList<Player> players= new ArrayList<>();
 
@@ -37,11 +40,15 @@ public class VolleyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_volley);
 
+        tennisPlayerRV = findViewById(R.id.tennisPlayerRV);
+
+        RecyclerView.LayoutManager manager =new  LinearLayoutManager(this);
+        tennisPlayerRV.setLayoutManager(manager);
+
         requestQueue = Volley.newRequestQueue(this);
 
-      //  fetchDataFromServer();
+        fetchDataFromServer();
 
-        sendDataToServer();
     }
 
 
@@ -118,6 +125,9 @@ public class VolleyActivity extends AppCompatActivity {
                 players.add(player);
 
             }
+
+            TennisAdapter tennisAdapter = new TennisAdapter(this,players);
+            tennisPlayerRV.setAdapter(tennisAdapter);
 
         } catch (JSONException e) {
             e.printStackTrace();
